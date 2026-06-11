@@ -1,67 +1,77 @@
-// const PASSWORD = "1234"; // şifre burada
+const products = [
+ {
+   Barcode: 9696000000013,
+   ProductName: "80 GPD Membran",
+   Quantity: 350,
+   UoM: "ADET",
+   SellingPrice: 0
+ },
+ {
+   Barcode: 9696000000051,
+   ProductName: "HF-3 CTO Karbon Filtre",
+   Quantity: 210,
+   UoM: "ADET",
+   SellingPrice: 0
+ },
+ {
+   Barcode: 9696000000068,
+   ProductName: "10\" GAC - Karbon Filtre",
+   Quantity: 250,
+   UoM: "ADET",
+   SellingPrice: 0
+ },
+ {
+   Barcode: 9696000000075,
+   ProductName: "10\" Karbonlu Shell Kab (Karbon)",
+   Quantity: 500,
+   UoM: "ADET",
+   SellingPrice: 0
+ },
+ {
+   Barcode: 9696000000082,
+   ProductName: "2,5\" Sediment Filtre",
+   Quantity: 70,
+   UoM: "ADET",
+   SellingPrice: 0
+ },
+ {
+   Barcode: 9696000000099,
+   ProductName: "2,5\" GAC Karbon Filtre",
+   Quantity: 250,
+   UoM: "ADET",
+   SellingPrice: 0
+ }
+];
 
-// giriş kontrolü
-// function login(){
-  //   const pass = document.getElementById("password").value;
+const list = document.getElementById("product-list");
+const search = document.getElementById("search");
 
-   //  if(pass === PASSWORD){
-    //     localStorage.setItem("auth","ok");
-    //     showApp();
-  //   } else {
-  //       document.getElementById("error").innerText = "Hatalı şifre!";
-  //   }
-// }
+// Ürünleri ekrana bas
+function render(items) {
+    list.innerHTML = "";
 
-// sayfa açılış kontrolü
-// window.onload = function(){
- //    if(localStorage.getItem("auth") === "ok"){
-   //      showApp();
-  //   }
-// }
-
-// giriş sonrası
-function showApp(){
-    document.getElementById("loginBox").style.display = "none";
-    document.getElementById("app").style.display = "block";
-
-    loadProducts();
-}
-
-// ürünleri yükle
-let products = [];
-
-function loadProducts(){
-    fetch("products.json")
-    .then(res => res.json())
-    .then(data => {
-        products = data;
-        render(products);
+    items.forEach(p => {
+        list.innerHTML += `
+            <div class="product">
+                <div class="barcode">Barkod: ${p.Barcode}</div>
+                <div><strong>${p.ProductName}</strong></div>
+                <div class="stock">Stok: ${p.Quantity} ${p.UoM}</div>
+            </div>
+        `;
     });
 }
 
-// render
-function render(list){
-    const box = document.getElementById("product-list");
+// İlk yükleme
+render(products);
 
-    box.innerHTML = list.map(p => `
-        <div class="card">
-            <h3>${p.ProductName}</h3>
-            <p>Barkod: ${p.Barcode}</p>
-            <p>Stok: ${p.Quantity}</p>
-        </div>
-    `).join("");
-}
+// Arama (barkod + isim)
+search.addEventListener("input", function () {
+    const value = this.value.toLowerCase();
 
-// arama
-document.addEventListener("input", e=>{
-    if(e.target.id === "search"){
-        const q = e.target.value.toLowerCase();
+    const filtered = products.filter(p =>
+        p.ProductName.toLowerCase().includes(value) ||
+        String(p.Barcode).includes(value)
+    );
 
-        const filtered = products.filter(p =>
-            p.ProductName.toLowerCase().includes(q) ||
-            String(p.Barcode).includes(q)
-        );
-
-        render(filtered);
-    }
+    render(filtered);
 });
