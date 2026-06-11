@@ -1,23 +1,23 @@
-const PASSWORD = "1234"; // şifre burada
+// const PASSWORD = "1234"; // şifre burada
 
 // giriş kontrolü
-function login(){
-    const pass = document.getElementById("password").value;
+// function login(){
+  //   const pass = document.getElementById("password").value;
 
-    if(pass === PASSWORD){
-        localStorage.setItem("auth","ok");
-        showApp();
-    } else {
-        document.getElementById("error").innerText = "Hatalı şifre!";
-    }
-}
+   //  if(pass === PASSWORD){
+    //     localStorage.setItem("auth","ok");
+    //     showApp();
+  //   } else {
+  //       document.getElementById("error").innerText = "Hatalı şifre!";
+  //   }
+// }
 
 // sayfa açılış kontrolü
-window.onload = function(){
-    if(localStorage.getItem("auth") === "ok"){
-        showApp();
-    }
-}
+// window.onload = function(){
+ //    if(localStorage.getItem("auth") === "ok"){
+   //      showApp();
+  //   }
+// }
 
 // giriş sonrası
 function showApp(){
