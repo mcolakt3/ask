@@ -1,4 +1,4 @@
-const PASSWORD = "1234"; // şifre burada
+const PASSWORD = "01012026"; // şifre burada
 
 // giriş kontrolü
 function login(){
