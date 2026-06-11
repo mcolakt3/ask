@@ -75,3 +75,9 @@ search.addEventListener("input", function () {
 
     render(filtered);
 });
+
+fetch("products.json")
+  .then(res => res.json())
+  .then(data => {
+      render(data);
+  });
